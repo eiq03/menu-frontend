@@ -1,12 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
 import { SpotDialog } from "./spot-dialog";
-import React from "react";
+import React, { useState } from "react";
+import type { SpotDTO } from "../dtos/spot.dto";
 
 export function SpotButton() {
 
   const [dialogOpen, setDialogOpen] = React.useState(false);
 
+  const [selectedSpot, setSelectedSpot] = useState<SpotDTO | null>(() => {
+    const spotStorage = localStorage.getItem('spot')
+    return spotStorage ? JSON.parse(spotStorage) : null
+  });
+
+  function handleSelect (spot: SpotDTO) {
+    localStorage.setItem('spot', JSON.stringify(spot))
+    setSelectedSpot(spot);
+    setDialogOpen(false);
+  }
 
   return (
     <div className="flex items-center justify-center">
@@ -16,9 +27,13 @@ export function SpotButton() {
         onClick={() => setDialogOpen(true)}
         >
         <MapPin className="size-6" />
-        Selecionar mesa
+        { selectedSpot ? selectedSpot.name : 'Selecionar mesa'}
       </Button>
-      <SpotDialog open={dialogOpen} />
+      <SpotDialog
+        open={dialogOpen}
+        onSelect={handleSelect}
+        selectedSpotId={selectedSpot?.id}
+      />
     </div>
   );
 }

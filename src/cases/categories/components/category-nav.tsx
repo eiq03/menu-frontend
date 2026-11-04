@@ -1,0 +1,35 @@
+import { Link } from "react-router-dom"
+import { cn } from "cn"
+import { useCategories } from "../hooks/use-category"
+import { Utensils } from "lucide-react"
+
+export function CategoryNav() {
+
+    const { data: categories = []} = useCategories()
+
+    return(
+        <nav className="2-full">
+            <ul className="overflow-hidden rounded-xl border border-border/70 bg-transparent">
+                { categories.map((category) => (
+                    <li key={category.id} className="relative">
+                        <link
+                        to={`/produts?category=${category.id}`}
+                        className={cn(
+                            'relative flex w-full items-center px-5 py-5 gap-3','font-menu text-lg font-semibold uppercase tracking-tight','border-xl border-transparent','transition-colors duration-200','hover:z-10 hover:text-[#B86A2C]'
+                        )}
+                        >
+                            {category.icon ? (
+                                <span>ICON</span>
+                            ) : (
+                                <Utensils className="size-10 text-brand"
+                                />
+                            )}
+                            <span className="leading-tight">{category.name}</span>
+                        </link>
+                    </li>
+                )) }
+            </ul>
+        </nav>
+    )
+
+}

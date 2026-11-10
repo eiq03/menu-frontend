@@ -8,14 +8,16 @@ export function CategoryNav() {
     const { data: categories = []} = useCategories()
 
     return(
-        <nav className="2-full">
+        <nav className="w-full">
             <ul className="overflow-hidden rounded-xl border border-border/70 bg-transparent">
                 { categories.map((category) => (
                     <li key={category.id} className="relative">
-                        <link
-                        to={`/produts?category=${category.id}`}
+                        <Link
+                        to={`/products?category=${category.id}`}
                         className={cn(
-                            'relative flex w-full items-center px-5 py-5 gap-3','font-menu text-lg font-semibold uppercase tracking-tight','border-xl border-transparent','transition-colors duration-200','hover:z-10 hover:text-[#B86A2C]'
+                            'relative flex w-full items-center px-5 py-5 gap-3','font-menu text-lg font-semibold uppercase tracking-tight','border-xl border-transparent','transition-colors duration-200','hover:z-10 hover:text-[#B86A2C]',
+                            selectedCategory === category.id ?
+                            ['border-[#B86A2C]'] : []                        
                         )}
                         >
                             {category.icon ? (
@@ -25,7 +27,7 @@ export function CategoryNav() {
                                 />
                             )}
                             <span className="leading-tight">{category.name}</span>
-                        </link>
+                        </Link>
                     </li>
                 )) }
             </ul>

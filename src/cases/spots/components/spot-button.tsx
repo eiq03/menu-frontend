@@ -31,6 +31,7 @@ export function SpotButton() {
       </Button>
       <SpotDialog
         open={dialogOpen}
+        onOpenChange={setDialogOpen}
         onSelect={handleSelect}
         selectedSpotId={selectedSpot?.id}
       />

@@ -13,6 +13,7 @@ import { cn } from "cn";
 
 interface SpotDialogProps {
     open: boolean;
+    onOpenChange: (open: boolean) => void;
     onSelect: (spot: SpotDTO) => void;
     selectedSpotId?: string;
 }
@@ -20,6 +21,7 @@ interface SpotDialogProps {
 
 export function SpotDialog({
     open,
+    onOpenChange,
     onSelect,
     selectedSpotId
 }:SpotDialogProps) {
@@ -27,7 +29,7 @@ export function SpotDialog({
     const { data: spots = [] } = UseSpots();
 
     return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
     <DialogContent>
         <DialogHeader>
         <DialogTitle>Selecione sua mesa</DialogTitle>

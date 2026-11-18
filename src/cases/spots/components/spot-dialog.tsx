@@ -47,7 +47,7 @@ export function SpotDialog({
                     variant="outline"
                     className={cn(
                         'h-auto min-h-20 flex-col p-4',
-                        spot.id === selectedSpotId && 'border-primary bg-accent text-primary'
+                        spot.id === selectedSpotId && 'border-primary bg-accent text-primary-foreground'
                     )}
                     onClick={() => onSelect(spot)}
                     >

@@ -11,7 +11,7 @@ export function useCategories() {
 
 export function useCategory(id: string) {
   return useQuery({
-    queryKey: ['category', id],
+    queryKey: ['categories', id],
     queryFn: () => CategoryService.findOne(id),
     enabled: !!id,
   })
